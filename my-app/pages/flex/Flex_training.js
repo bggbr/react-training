@@ -83,6 +83,22 @@ export default function Flex_First() {
                 <div className="h-[14%] w-[20%] bg-cyan-600"></div>
                 <div className="h-[14%] w-[30%] bg-cyan-600"></div>
             </div>
+            <h1 className="text-black">Vertical stack (centered)</h1>
+            <div className="flex flex-col items-center">
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+            </div>
+            <h1 className="text-black">Masonry (or mosaic)</h1>
+            <div className="flex flex-col items-center">
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+                <div className="w-80 mb-[10px] h-[40px] bg-cyan-800"></div>
+            </div>
         </div>
     );
 }

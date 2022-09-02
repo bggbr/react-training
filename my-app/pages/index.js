@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Button from '../src/component/Button';
 import styles from '../styles/Home.module.css';
-import Flex_First from './flex/1';
+import Flex_First from './flex/Flex_training';
 
 export default function Home() {
     return (
