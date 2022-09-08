@@ -1,15 +1,17 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import Button from '../src/component/Button';
-import styles from '../styles/Home.module.css';
-import Flex_First from './flex/Flex_training';
+import Category from '../src/component/Category';
+import Header from '../src/component/Header';
+import Menu from '../src/component/Menu';
 
-export default function Home() {
+function Home() {
     return (
-        <div className={styles.container}>
-            <Button>asdf</Button>
-            <Button disabled={false}>asdf</Button>
-            <Flex_First></Flex_First>
+        <div>
+            <Header />
+            <div className="flex">
+                <Category />
+                <Menu />
+            </div>
         </div>
     );
 }
+
+export default Home;

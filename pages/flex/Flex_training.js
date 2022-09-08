@@ -33,27 +33,27 @@ export default function Flex_First() {
             </div>
             <h1 className="text-black">3 X 3 grid</h1>
             <div className="flex flex-wrap justify-between">
-                <div className="basis-[32%]  h-100px mb-[2%] bg-blue-900">1</div>
-                <div className="basis-[32%]  h-100px mb-[2%] bg-blue-900">2</div>
-                <div className="basis-[32%]  h-100px mb-[2%] bg-blue-900">3</div>
-                <div className="basis-[32%]  h-100px mb-[2%] bg-blue-900">4</div>
-                <div className="basis-[32%]  h-100px mb-[2%] bg-blue-900">5</div>
-                <div className="basis-[32%]  h-100px mb-[2%] bg-blue-900">6</div>
-                <div className="basis-[32%]  h-100px mb-[2%] bg-blue-900">7</div>
-                <div className="basis-[32%]  h-100px mb-[2%] bg-blue-900">8</div>
-                <div className="basis-[32%]  h-100px mb-[2%] bg-blue-900">9</div>
+                <div className="basis-[32%] h-100px mb-[2%] bg-blue-900">1</div>
+                <div className="basis-[32%] h-100px mb-[2%] bg-blue-900">2</div>
+                <div className="basis-[32%] h-100px mb-[2%] bg-blue-900">3</div>
+                <div className="basis-[32%] h-100px mb-[2%] bg-blue-900">4</div>
+                <div className="basis-[32%] h-100px mb-[2%] bg-blue-900">5</div>
+                <div className="basis-[32%] h-100px mb-[2%] bg-blue-900">6</div>
+                <div className="basis-[32%] h-100px mb-[2%] bg-blue-900">7</div>
+                <div className="basis-[32%] h-100px mb-[2%] bg-blue-900">8</div>
+                <div className="basis-[32%] h-100px mb-[2%] bg-blue-900">9</div>
             </div>
             <h1 className="text-black">3 X 3 grid proportions (1:1)</h1>
             <div className="flex flex-wrap justify-between ">
-                <div className="relative w-[32%]  pb-[32%] mb-[2%] bg-blue-700"></div>
-                <div className="relative w-[32%]  pb-[32%] mb-[2%] bg-blue-700"></div>
-                <div className="relative w-[32%]  pb-[32%] mb-[2%] bg-blue-700"></div>
-                <div className="relative w-[32%]  pb-[32%] mb-[2%] bg-blue-700"></div>
-                <div className="relative w-[32%]  pb-[32%] mb-[2%] bg-blue-700"></div>
-                <div className="relative w-[32%]  pb-[32%] mb-[2%] bg-blue-700"></div>
-                <div className="relative w-[32%]  pb-[32%] mb-[2%] bg-blue-700"></div>
-                <div className="relative w-[32%]  pb-[32%] mb-[2%] bg-blue-700"></div>
-                <div className="relative w-[32%]  pb-[32%] mb-[2%] bg-blue-700"></div>
+                <div className="relative w-[32%] pb-[32%] mb-[2%] bg-blue-700"></div>
+                <div className="relative w-[32%] pb-[32%] mb-[2%] bg-blue-700"></div>
+                <div className="relative w-[32%] pb-[32%] mb-[2%] bg-blue-700"></div>
+                <div className="relative w-[32%] pb-[32%] mb-[2%] bg-blue-700"></div>
+                <div className="relative w-[32%] pb-[32%] mb-[2%] bg-blue-700"></div>
+                <div className="relative w-[32%] pb-[32%] mb-[2%] bg-blue-700"></div>
+                <div className="relative w-[32%] pb-[32%] mb-[2%] bg-blue-700"></div>
+                <div className="relative w-[32%] pb-[32%] mb-[2%] bg-blue-700"></div>
+                <div className="relative w-[32%] pb-[32%] mb-[2%] bg-blue-700"></div>
             </div>
             <h1 className="text-black">3 X 3 grid, constrained proportions (16:9)</h1>
             <div className="flex flex-wrap justify-between">
