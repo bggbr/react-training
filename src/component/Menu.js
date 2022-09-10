@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import Button from './Button';
-export default function Menu({ menuList, setMenu, isCategory }) {
+export default function Menu({ menuList, setMenu, isCategory, setCookingList }) {
 	const [name, setName] = useState('');
 	const [cookingTime, setCookingTime] = useState('');
 	const [price, setPrice] = useState('');
@@ -33,8 +33,18 @@ export default function Menu({ menuList, setMenu, isCategory }) {
 		setPrice('');
 	}
 
+	const addCooking = ({ name, cookingTime, price }, e) => {
+		e.preventDefault();
+		let menu = {
+			name,
+			cookingTime: parseInt(cookingTime),
+			price: parseInt(price),
+		};
+		setCookingList(menu);
+	};
+
 	return (
-		<div className='bg-slate-200 p-5 w-full'>
+		<div className='bg-slate-400 p-5 w-full'>
 			<h2 className='font-bold flex space-x-3'>
 				<div className='text-5xl'>🥘</div>
 				<div className='text-2xl self-center'>메뉴</div>
@@ -46,7 +56,9 @@ export default function Menu({ menuList, setMenu, isCategory }) {
 						<div>{menu.name}</div>
 						<div>조리시간: {menu.cookingTime}</div>
 						<div>가격: {menu.price}</div>
-						<Button>조리 시작</Button>
+						<Button className='mr-2 my-2.5' onClick={(e) => addCooking(menu, e)}>
+							조리 시작
+						</Button>
 						<Button>메뉴 삭제</Button>
 					</div>
 				))}

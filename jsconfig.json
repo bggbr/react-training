@@ -1,7 +1,8 @@
 {
-    "compilerOptions": {
-        "module": "esnext",
-        "target": "es6"
-    },
-    "exclude": ["node_modules"]
+	"compilerOptions": {
+		"module": "esnext",
+		"target": "es6",
+		"jsx": "react"
+	},
+	"exclude": ["node_modules"]
 }

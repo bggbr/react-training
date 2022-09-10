@@ -29,6 +29,7 @@ function Home() {
 			category: 'japaness',
 		},
 	]);
+	const [cookingMenu, setCookingMenu] = useState([]);
 
 	const setCategory = (category) => {
 		setIsCategory(category);
@@ -42,10 +43,16 @@ function Home() {
 		return allMenuList.filter((el) => el.category === nation).length;
 	};
 
+	const setCookingList = (cookMenu) => {
+		setCookingMenu([...cookingMenu, cookMenu]);
+	};
+
 	useEffect(() => {
 		let menu = allMenuList.filter((el) => el.category === isCategory);
 		setIsMenuList(menu);
 	}, [allMenuList, isCategory]);
+
+	useEffect(() => {}, [cookingMenu]);
 
 	return (
 		<div>
@@ -59,10 +66,10 @@ function Home() {
 						</div>;
 					})}
 			</div> */}
-			<Header />
+			<Header cookingMenu={cookingMenu} />
 			<div className='flex'>
 				<Category setCategory={setCategory} menuCount={menuCount} />
-				<Menu menuList={isMenuList} setMenu={setMenu} isCategory={isCategory} />
+				<Menu menuList={isMenuList} setMenu={setMenu} isCategory={isCategory} setCookingList={setCookingList} />
 			</div>
 		</div>
 	);
