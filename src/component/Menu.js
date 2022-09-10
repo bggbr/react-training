@@ -28,6 +28,9 @@ export default function Menu({ menuList, setMenu, isCategory }) {
 			category: isCategory,
 		};
 		setMenu(menu);
+		setName('');
+		setCookingTime('');
+		setPrice('');
 	}
 
 	return (
