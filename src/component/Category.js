@@ -1,29 +1,28 @@
-import react, { useState, useEffect } from 'react';
+import react, { useState, useEffect, useContext } from 'react';
 import Button from './Button';
+import { MenuContext } from '../context/MenuContext'
 
-export default function Category({ setCategory, menuCount }) {
-	const [isState, setIsState] = useState('korean');
-
+export default function Category({ category, setCategory }) {
 	const selectCategory = (e) => {
-		setIsState(e.target.value);
+		setCategory(e.target.value);
 	};
 
-	let koreanMenuCount = useEffect(() => {
-		setCategory(isState);
-	}, [isState]);
+	const allMenuList = useContext(MenuContext);
+	const countMenu = (currentCategory) => allMenuList.filter((el) => el.category === currentCategory).length
 
+	// TODO: 버튼 코드 중복 없애기
 	return (
 		<div className='bg-slate-800 text-white w-52 p-5'>
 			<h2 className='font-bold mb-5'>카테고리</h2>
 			<div className='flex flex-col space-y-5'>
-				<Button className={isState === 'korean' ? 'bg-neutral-400' : ''} onClick={selectCategory} value='korean'>
-					한식 ({menuCount('korean')})
+				<Button className={category === 'korean' ? 'bg-neutral-400' : ''} onClick={selectCategory} value='korean'>
+					한식 ({countMenu('korean')})
 				</Button>
-				<Button className={isState === 'japaness' ? 'bg-neutral-400' : ''} onClick={selectCategory} value='japaness'>
-					일식 ({menuCount('japaness')})
+				<Button className={category === 'japaness' ? 'bg-neutral-400' : ''} onClick={selectCategory} value='japaness'>
+					일식 ({countMenu('japaness')})
 				</Button>
-				<Button className={isState === 'chinese' ? 'bg-neutral-400' : ''} onClick={selectCategory} value='chinese'>
-					중식 ({menuCount('chinese')})
+				<Button className={category === 'chinese' ? 'bg-neutral-400' : ''} onClick={selectCategory} value='chinese'>
+					중식 ({countMenu('chinese')})
 				</Button>
 			</div>
 		</div>

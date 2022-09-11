@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState, useContext } from 'react';
+import { MenuContext } from '../context/MenuContext';
 
 export default function Header({ cookingMenu }) {
 	const [sec, setSec] = useState(0);
-	useEffect(() => {
-		console.log(cookingMenu);
-	}, [cookingMenu]);
+	const menu = useContext(MenuContext);
 
 	return (
 		<div className='bg-yellow-300 p-5 flex flex-col space-y-5 justify-between'>
@@ -16,15 +15,14 @@ export default function Header({ cookingMenu }) {
 			</div>
 
 			<div>
-				{/* {cookingMenu.map((menu, index) => {
+				{cookingMenu.map((cook) => {
 					return (
-						<div key={index} className='mb-4'>
-							<div>{menu.name}</div>
-							<div>{menu.cookingTime}</div>
-							<div>{menu.price}</div>
+						<div key={cook.id} className='mb-4'>
+							<div>{menu.find((el) => el.id === cook.menuId).name}</div>
+							<div>{cook.remainingTime}</div>
 						</div>
 					);
-				})} */}
+				})}
 			</div>
 		</div>
 	);

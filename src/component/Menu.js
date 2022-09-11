@@ -1,9 +1,14 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Button from './Button';
-export default function Menu({ menuList, setMenu, isCategory, setCookingList }) {
+import { MenuContext } from '../context/MenuContext';
+
+export default function Menu({ setMenu, category, setCookingList }) {
 	const [name, setName] = useState('');
 	const [cookingTime, setCookingTime] = useState('');
 	const [price, setPrice] = useState('');
+	const allMenuList = useContext(MenuContext);
+
+	const menuList = allMenuList.filter((el) => el.category === category);
 
 	/**
 	 * 현재 카테고리를 상태값으로 관리
@@ -25,7 +30,7 @@ export default function Menu({ menuList, setMenu, isCategory, setCookingList }) 
 			name,
 			cookingTime: parseInt(cookingTime),
 			price: parseInt(price),
-			category: isCategory,
+			category,
 		};
 		setMenu(menu);
 		setName('');
@@ -33,14 +38,19 @@ export default function Menu({ menuList, setMenu, isCategory, setCookingList }) 
 		setPrice('');
 	}
 
-	const addCooking = ({ name, cookingTime, price }, e) => {
+	// const firstMenu = menuList[0];
+	// addCooking(firstMenu, e);
+	// cookingList[0]
+	// firstMenu.name = 'abc'
+	// cookingList[0].name !== firstMenu.name
+	const addCooking = ({ id, name, cookingTime, price }, e) => {
 		e.preventDefault();
-		let menu = {
-			name,
-			cookingTime: parseInt(cookingTime),
-			price: parseInt(price),
+		let cooking = {
+			menuId: id,
+			id: Date.now(),
+			remainingTime: cookingTime,
 		};
-		setCookingList(menu);
+		setCookingList(cooking);
 	};
 
 	return (
@@ -50,18 +60,17 @@ export default function Menu({ menuList, setMenu, isCategory, setCookingList }) 
 				<div className='text-2xl self-center'>메뉴</div>
 			</h2>
 
-			{menuList &&
-				menuList.map((menu, idx) => (
-					<div key={idx}>
-						<div>{menu.name}</div>
-						<div>조리시간: {menu.cookingTime}</div>
-						<div>가격: {menu.price}</div>
-						<Button className='mr-2 my-2.5' onClick={(e) => addCooking(menu, e)}>
-							조리 시작
-						</Button>
-						<Button>메뉴 삭제</Button>
-					</div>
-				))}
+			{menuList.map((menu) => (
+				<div key={menu.id}>
+					<div>{menu.name}</div>
+					<div>조리시간: {menu.cookingTime}</div>
+					<div>가격: {menu.price}</div>
+					<Button className='mr-2 my-2.5' onClick={(e) => addCooking(menu, e)}>
+						조리 시작
+					</Button>
+					<Button>메뉴 삭제</Button>
+				</div>
+			))}
 
 			<div className='space-x-2'>
 				<input type='text' placeholder='요리 이름' value={name} onChange={(e) => setName(e.target.value)} />
