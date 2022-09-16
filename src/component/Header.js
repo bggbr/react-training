@@ -1,72 +1,55 @@
 import { memo, useEffect, useState, useContext, useReducer } from 'react';
-import { MenuContext } from '../context/MenuContext';
+import { MenuContext } from '../state';
 import Button from './Button';
 import Cooking from './Cooking';
 
-const reducer = (state, action) => {};
+export default function Header({ maxCook, setMaxCook, cookingMenu, setCookingMenu }) {
+	const [revenue, setRevenue] = useState(0);
 
-export default function Header({ cookingMenu, setCookingMenu }) {
-    const [time, setTime] = useState([
-        { menuId: 1, id: 1662992018406, remainingTime: 3 },
-        { menuId: 2, id: 1662992018111, remainingTime: 10 },
-        { menuId: 3, id: 1662992022310, remainingTime: 5 },
-    ]);
-    const menu = useContext(MenuContext);
-    const [test, dispatch] = useReducer(reducer, cookingMenu);
+	const settleCookingMenu = (nowCookMenu) => {
+		let removedMenu = cookingMenu.find((m) => m.id === nowCookMenu.id);
+		let newCookMenu = cookingMenu.filter((m) => m.id !== removedMenu.id);
+		setCookingMenu(newCookMenu);
+		if (nowCookMenu.flag === 'calc') setRevenue(revenue + menu.find((el) => el.name === nowCookMenu.name).price);
+	};
 
-    function decreaseTime() {
-        let timerId = setInterval(() => {
-            let resultTime = time.map((v) => {
-                v.remainingTime === 0 ? (v.remainingTime = 0) : (v.remainingTime -= 1);
-                return v;
-            });
-            setTime(resultTime);
-            let check = resultTime.find((el) => el.remainingTime);
-            check ? '' : clearInterval(timerId);
-        }, 1000);
-    }
+	const menu = useContext(MenuContext).allMenuList;
 
-    useEffect(() => {
-        decreaseTime();
-    }, []);
+	return (
+		<div className='bg-yellow-300 p-5 flex flex-col space-y-5 justify-between'>
+			<div className='flex justify-between'>
+				<h2 className='font-bold flex space-x-3'>
+					<div className='text-5xl'>🧑‍🍳</div>
+					<div className='text-2xl self-center'>조리 현황</div>
+				</h2>
 
-    return (
-        <div className="bg-yellow-300 p-5 flex flex-col space-y-5 justify-between">
-            {/* <div>
-                ----time----
-                {time.map((cook) => {
-                    return (
-                        <div key={cook.menuId} className="mb-4">
-                            <div>{cook.remainingTime}</div>
-                        </div>
-                    );
-                })}
-                ------------
-            </div> */}
-            <div className="flex justify-between">
-                <h2 className="font-bold flex space-x-3">
-                    <div className="text-5xl">🧑‍🍳</div>
-                    <div className="text-2xl self-center">조리 현황</div>
-                </h2>
-
-                <div>
-                    <div>
-                        <span className="mr-2">최대 동시 조리: 0</span>
-                        <Button className="mr-2">증가</Button>
-                        <Button>감소</Button>
-                    </div>
-                    💰 매출: 0원
-                </div>
-            </div>
-            <div>
-                {cookingMenu.map((cook) => {
-                    return (
-                        <div key={cook.id} className="mb-4">
-                            <Cooking menuId={cook.menuId} name={menu.find((el) => el.id === cook.menuId).name} remainingTime={cook.remainingTime}></Cooking>
-                        </div>
-                    );
-                })}
-            </div>
-        </div>
-    );
+				<div>
+					<div>
+						<span className='mr-2'>최대 동시 조리: {maxCook}</span>
+						<Button className='mr-2' onClick={() => setMaxCook(maxCook + 1)}>
+							증가
+						</Button>
+						<Button onClick={() => setMaxCook(maxCook - 1)}>감소</Button>
+					</div>
+					💰 매출: {revenue}원
+				</div>
+			</div>
+			<div>
+				{cookingMenu.length
+					? cookingMenu.map((cook) => {
+							return (
+								<div key={cook.id} className='mb-4'>
+									<Cooking
+										settleCookingMenu={settleCookingMenu}
+										id={cook.id}
+										name={menu.find((el) => el.id === cook.menuId).name}
+										remainingTime={cook.remainingTime}
+									></Cooking>
+								</div>
+							);
+					  })
+					: '조리 중인 요리가 없습니다.'}
+			</div>
+		</div>
+	);
 }

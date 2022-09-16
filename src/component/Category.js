@@ -1,6 +1,6 @@
 import react, { useState, useEffect, useContext } from 'react';
 import Button from './Button';
-import { MenuContext } from '../context/MenuContext'
+import { MenuContext } from '../state';
 
 export default function Category({ category, setCategory }) {
 	const selectCategory = (e) => {
@@ -8,7 +8,7 @@ export default function Category({ category, setCategory }) {
 	};
 
 	const allMenuList = useContext(MenuContext);
-	const countMenu = (currentCategory) => allMenuList.filter((el) => el.category === currentCategory).length
+	const countMenu = (currentCategory) => allMenuList.allMenuList.filter((el) => el.category === currentCategory).length;
 
 	// TODO: 버튼 코드 중복 없애기
 	return (
@@ -28,3 +28,5 @@ export default function Category({ category, setCategory }) {
 		</div>
 	);
 }
+
+const CATEGORY_LIST = ['korean', 'japaness', 'chinese'];
