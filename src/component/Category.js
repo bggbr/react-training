@@ -7,8 +7,8 @@ export default function Category({ category, setCategory }) {
 		setCategory(e.target.value);
 	};
 
-	const allMenuList = useContext(MenuContext);
-	const countMenu = (currentCategory) => allMenuList.allMenuList.filter((el) => el.category === currentCategory).length;
+	const allMenuList = useContext(MenuContext).allMenuList;
+	const countMenu = (currentCategory) => allMenuList.filter((el) => el.category === currentCategory).length;
 
 	// TODO: 버튼 코드 중복 없애기
 	return (

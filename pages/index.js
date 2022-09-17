@@ -56,23 +56,29 @@ function Home() {
 	return (
 		<div>
 			<MenuContext.Provider value={{ allMenuList, setAllMenuList }}>
-				<SetMenuContext.Provider value={setAllMenuList}>
-					<Header maxCook={maxCook} setMaxCook={setMaxCook} cookingMenu={cookingMenu} setCookingMenu={setCookingMenu} />
-					<div className='flex'>
-						<Category category={category} setCategory={setCategory} />
-						<Menu
-							maxCook={maxCook}
-							addMenu={addMenu}
-							removeMenu={removeMenu}
-							category={category}
-							cookingMenu={cookingMenu}
-							setCookingList={setCookingList}
-						/>
-					</div>
-				</SetMenuContext.Provider>
+				<Header maxCook={maxCook} setMaxCook={setMaxCook} cookingMenu={cookingMenu} setCookingMenu={setCookingMenu} />
+				<div className='flex'>
+					<Category category={category} setCategory={setCategory} />
+					<Menu
+						maxCook={maxCook}
+						addMenu={addMenu}
+						removeMenu={removeMenu}
+						category={category}
+						cookingMenu={cookingMenu}
+						setCookingList={setCookingList}
+					/>
+				</div>
 			</MenuContext.Provider>
 		</div>
 	);
 }
 
 export default Home;
+
+/**
+ * 메뉴 추가, 삭제
+ * 조리 시작, 조리 멈춤, 조리 삭제
+ * 계산하기
+ * 최대 동시 조리 표시 및 증가, 감소 (최대값 3, 최소값 0)
+ * 매출 표시
+ */

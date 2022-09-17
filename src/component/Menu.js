@@ -6,12 +6,12 @@ export default function Menu({ maxCook, addMenu, removeMenu, category, cookingMe
 	const [name, setName] = useState('');
 	const [cookingTime, setCookingTime] = useState('');
 	const [price, setPrice] = useState('');
-	const allMenuList = useContext(MenuContext);
+	const allMenuList = useContext(MenuContext).allMenuList;
 
-	const menuList = allMenuList.allMenuList.filter((el) => el.category === category);
+	const menuList = allMenuList.filter((el) => el.category === category);
 
 	function addOneMenu() {
-		let id = Math.max(...allMenuList.allMenuList.map((item) => item.id)) + 1;
+		let id = Math.max(...allMenuList.map((item) => item.id)) + 1;
 
 		if (!(name.length && cookingTime.length && price.length)) {
 			alert('모든 값을 입력해주세요');
