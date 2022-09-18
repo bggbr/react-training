@@ -1,12 +1,13 @@
 import { useContext, useState, useEffect } from 'react';
 import Button from './Button';
-import { MenuContext } from '../state';
+import { MenuContext, CookingContext } from '../state';
 
 export default function Menu({ maxCook, addMenu, removeMenu, category, cookingMenu, setCookingList }) {
 	const [name, setName] = useState('');
 	const [cookingTime, setCookingTime] = useState('');
 	const [price, setPrice] = useState('');
 	const allMenuList = useContext(MenuContext).allMenuList;
+	const { dispatch } = useContext(CookingContext);
 
 	const menuList = allMenuList.filter((el) => el.category === category);
 
@@ -32,13 +33,19 @@ export default function Menu({ maxCook, addMenu, removeMenu, category, cookingMe
 	}
 
 	const addCooking = ({ id, name, cookingTime, price }, e) => {
+		console.log(dispatch);
+
 		e.preventDefault();
 		let cooking = {
 			menuId: id,
 			id: Date.now(),
+			name,
 			remainingTime: cookingTime,
+			price,
 		};
-		if (cookingMenu.length < maxCook) setCookingList(cooking);
+		// if (cookingMenu.length < maxCook) setCookingList(cooking);
+		// console.log(dispatch);
+		dispatch({ type: 'add-cooking', cookingMenu: cooking });
 	};
 
 	return (

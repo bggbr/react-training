@@ -2,18 +2,21 @@ import { memo, useEffect, useState, useContext, useReducer } from 'react';
 import { MenuContext } from '../state';
 import Button from './Button';
 import Cooking from './Cooking';
+import { CookingContext } from '../state';
 
-export default function Header({ maxCook, setMaxCook, cookingMenu, setCookingMenu }) {
+export default function Header({ maxCook, setMaxCook }) {
 	const [revenue, setRevenue] = useState(0);
+	const { state, dispatch } = useContext(CookingContext);
 
-	const settleCookingMenu = (nowCookMenu) => {
-		let removedMenu = cookingMenu.find((m) => m.id === nowCookMenu.id);
-		let newCookMenu = cookingMenu.filter((m) => m.id !== removedMenu.id);
-		setCookingMenu(newCookMenu);
-		if (nowCookMenu.flag === 'calc') setRevenue(revenue + menu.find((el) => el.name === nowCookMenu.name).price);
+	useEffect(() => {
+		console.log('Cooking state =', state.cookingMenu);
+	}, [state]);
+
+	const taskCookingMenu = (nowCookMenu) => {
+		let removedCooking = state.cookingMenu.find((m) => m.id === nowCookMenu.id);
+		let { flag } = nowCookMenu;
+		flag === 'stop' ? dispatch({ type: 'delete-cooking', removedCooking }) : dispatch({ type: 'pay-cooking', removedCooking });
 	};
-
-	const menu = useContext(MenuContext).allMenuList;
 
 	return (
 		<div className='bg-yellow-300 p-5 flex flex-col space-y-5 justify-between'>
@@ -35,20 +38,19 @@ export default function Header({ maxCook, setMaxCook, cookingMenu, setCookingMen
 				</div>
 			</div>
 			<div>
-				{cookingMenu.length
-					? cookingMenu.map((cook) => {
-							return (
-								<div key={cook.id} className='mb-4'>
-									<Cooking
-										settleCookingMenu={settleCookingMenu}
-										id={cook.id}
-										name={menu.find((el) => el.id === cook.menuId).name}
-										remainingTime={cook.remainingTime}
-									></Cooking>
-								</div>
-							);
-					  })
-					: '조리 중인 요리가 없습니다.'}
+				{state.cookingMenu.map((cook) => {
+					return (
+						<div key={cook.id} className='mb-4'>
+							<Cooking
+								taskCookingMenu={taskCookingMenu}
+								id={cook.id}
+								// name={menu.find((el) => el.id === cook.menuId).name}
+								name={cook.name}
+								remainingTime={cook.remainingTime}
+							></Cooking>
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);

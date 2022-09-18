@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import Button from './Button';
 
-export default function Cooking({ settleCookingMenu, id, name, remainingTime }) {
+export default function Cooking({ taskCookingMenu, id, name, remainingTime }) {
 	const [count, setCount] = useState(remainingTime);
 	const [isPause, setIsPause] = useState(false);
 
@@ -44,7 +44,7 @@ export default function Cooking({ settleCookingMenu, id, name, remainingTime }) 
 				<Button
 					className='mr-2'
 					onClick={() => {
-						settleCookingMenu({ id, flag: 'stop' });
+						taskCookingMenu({ id, flag: 'stop' });
 					}}
 				>
 					stop
@@ -53,7 +53,7 @@ export default function Cooking({ settleCookingMenu, id, name, remainingTime }) 
 			<Button
 				className={count === 0 ? '' : 'hidden'}
 				onClick={() => {
-					settleCookingMenu({ id, name, flag: 'calc' });
+					taskCookingMenu({ id, name, flag: 'calc' });
 				}}
 			>
 				계산하기
