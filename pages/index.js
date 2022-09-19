@@ -9,6 +9,7 @@ const initialState = {
     maxCookingNum: 3,
     totalSales: 0,
 };
+
 const reducer = (state, action) => {
     switch (action.type) {
         case 'add-cooking':
@@ -34,7 +35,6 @@ const reducer = (state, action) => {
 };
 function Home() {
     const [category, setCategory] = useState('korean');
-    const [maxCook, setMaxCook] = useState(3);
     const [allMenuList, setAllMenuList] = useState([
         {
             id: 1,
@@ -58,7 +58,6 @@ function Home() {
             category: 'japaness',
         },
     ]);
-    const [cookingMenu, setCookingMenu] = useState([]);
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -76,7 +75,7 @@ function Home() {
             {/* {JSON.stringify(state)} */}
             <MenuContext.Provider value={{ allMenuList, setAllMenuList }}>
                 <CookingContext.Provider value={{ state, dispatch }}>
-                    <Header maxCook={maxCook} setMaxCook={setMaxCook} cookingMenu={cookingMenu} setCookingMenu={setCookingMenu} />
+                    <Header />
                     <div className="flex">
                         <Category category={category} setCategory={setCategory} />
                         <Menu addMenu={addMenu} removeMenu={removeMenu} category={category} />
