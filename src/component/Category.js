@@ -3,12 +3,6 @@ import Button from './Button';
 import { MenuContext } from '../state';
 
 export default function Category({ category, setCategory }) {
-    const CATEGORY_LIST = [
-        { id: 0, en: 'korean', kr: '한식' },
-        { id: 1, en: 'japaness', kr: '일식' },
-        { id: 2, en: 'chinese', kr: '중식' },
-    ];
-
     const allMenuList = useContext(MenuContext).allMenuList;
     const countMenu = (currentCategory) => allMenuList.filter((el) => el.category === currentCategory).length;
 
@@ -30,3 +24,9 @@ export default function Category({ category, setCategory }) {
         </div>
     );
 }
+
+const CATEGORY_LIST = [
+    { id: 0, en: 'korean', kr: '한식' },
+    { id: 1, en: 'japaness', kr: '일식' },
+    { id: 2, en: 'chinese', kr: '중식' },
+];

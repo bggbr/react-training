@@ -4,7 +4,7 @@ import Button from './Button';
 import Cooking from './Cooking';
 import { CookingContext } from '../state';
 
-export default function Header() {
+export default memo(function Header() {
     const { state, dispatch } = useContext(CookingContext);
 
     return (
@@ -39,4 +39,4 @@ export default function Header() {
             </div>
         </div>
     );
-}
+});

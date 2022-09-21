@@ -1,8 +1,9 @@
-import React, { useState, useEffect, createContext, useReducer } from 'react';
+import React, { useState, useEffect, createContext, useReducer, useMemo } from 'react';
 import Category from '../src/component/Category';
 import Header from '../src/component/Header';
 import Menu from '../src/component/Menu';
 import { MenuContext, CookingContext } from '../src/state';
+import produce from 'immer';
 
 const initialState = {
     cookingMenu: [],
@@ -10,29 +11,33 @@ const initialState = {
     totalSales: 0,
 };
 
-const reducer = (state, action) => {
-    switch (action.type) {
-        case 'add-cooking':
-            let nowCookNum = state.cookingMenu.length;
-            if (nowCookNum < state.maxCookingNum) {
-                return { ...state, cookingMenu: [...state.cookingMenu, action.cookingMenu] };
-            }
-        case 'delete-cooking':
-            let { deleteId } = action;
-            let leftCookingMenu = state.cookingMenu.filter((el) => el.id !== deleteId);
-            return { ...state, cookingMenu: [...leftCookingMenu] };
-        case 'pay-cooking':
-            let { payId, price } = action;
-            let remainCookingMenu = state.cookingMenu.filter((el) => el.id !== payId);
-            return { ...state, totalSales: state.totalSales + price, cookingMenu: [...remainCookingMenu] };
-        case 'plus-maxCooking':
-            return { ...state, maxCookingNum: state.maxCookingNum + 1 > 3 ? 3 : state.maxCookingNum + 1 };
-        case 'minus-maxCooking':
-            return { ...state, maxCookingNum: state.maxCookingNum - 1 < 0 ? 0 : state.maxCookingNum - 1 };
-        default:
-            return new Error();
-    }
+const reducer = (_state, action) => {
+    return produce(_state, (state) => {
+        switch (action.type) {
+            case 'add-cooking':
+                let nowCookNum = state.cookingMenu.length;
+                if (nowCookNum < state.maxCookingNum) {
+                    state.cookingMenu.push(action.cookingMenu);
+                }
+                break;
+            case 'delete-cooking':
+                let { deleteId } = action;
+                state.cookingMenu = state.cookingMenu.filter((el) => el.id !== deleteId);
+                break;
+            case 'pay-cooking':
+                let { payId, price } = action;
+                let remainCookingMenu = state.cookingMenu.filter((el) => el.id !== payId);
+                return { ...state, totalSales: state.totalSales + price, cookingMenu: [...remainCookingMenu] };
+            case 'plus-maxCooking':
+                return { ...state, maxCookingNum: state.maxCookingNum + 1 > 3 ? 3 : state.maxCookingNum + 1 };
+            case 'minus-maxCooking':
+                return { ...state, maxCookingNum: state.maxCookingNum - 1 < 0 ? 0 : state.maxCookingNum - 1 };
+            default:
+                return state;
+        }
+    });
 };
+
 function Home() {
     const [category, setCategory] = useState('korean');
     const [allMenuList, setAllMenuList] = useState([
@@ -61,6 +66,14 @@ function Home() {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const cook = useMemo(
+        () => ({
+            state,
+            dispatch,
+        }),
+        [state, dispatch],
+    );
+
     const addMenu = (menu) => {
         setAllMenuList([...allMenuList, menu]);
     };
@@ -70,11 +83,12 @@ function Home() {
         setAllMenuList(copyAllMenu);
     };
 
+    const [v, setV] = useState(1);
     return (
         <div>
-            {/* {JSON.stringify(state)} */}
+            <button onClick={() => setV(v + 1)}>증가</button>
             <MenuContext.Provider value={{ allMenuList, setAllMenuList }}>
-                <CookingContext.Provider value={{ state, dispatch }}>
+                <CookingContext.Provider value={cook}>
                     <Header />
                     <div className="flex">
                         <Category category={category} setCategory={setCategory} />

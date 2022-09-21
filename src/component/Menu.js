@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import { MenuContext, CookingContext } from '../state';
 
@@ -10,6 +10,8 @@ export default function Menu({ addMenu, removeMenu, category }) {
     const { state, dispatch } = useContext(CookingContext);
 
     const menuList = allMenuList.filter((el) => el.category === category);
+
+    console.log('menu rendering');
 
     function addOneMenu() {
         let id = Math.max(...allMenuList.map((item) => item.id)) + 1;
@@ -46,6 +48,21 @@ export default function Menu({ addMenu, removeMenu, category }) {
         if (cookingMenu.length < maxCookingNum) dispatch({ type: 'add-cooking', cookingMenu: cooking });
     };
 
+    const focusRef = useRef();
+    useEffect(
+        // 1
+        () => {
+            const handleKeyup = (e) => {
+                if (e.key === 'a') {
+                    focusRef.current.focus();
+                }
+            };
+            window.addEventListener('keyup', handleKeyup);
+            return () => window.removeEventListener('keyup', handleKeyup); // 2
+        },
+        [],
+    );
+
     return (
         <div className="bg-slate-400 p-5 w-full">
             <h2 className="font-bold flex space-x-3 mb-4">
@@ -67,7 +84,7 @@ export default function Menu({ addMenu, removeMenu, category }) {
             </div>
 
             <div className="space-x-2">
-                <input type="text" placeholder="요리 이름" value={name} onChange={(e) => setName(e.target.value)} />
+                <input ref={focusRef} type="text" placeholder="요리 이름" value={name} onChange={(e) => setName(e.target.value)} />
 
                 <input type="number" placeholder="조리 시간" value={cookingTime} onChange={(e) => setCookingTime(e.target.value)} />
 
