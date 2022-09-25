@@ -26,12 +26,15 @@ const reducer = (_state, action) => {
                 break;
             case 'pay-cooking':
                 let { payId, price } = action;
-                let remainCookingMenu = state.cookingMenu.filter((el) => el.id !== payId);
-                return { ...state, totalSales: state.totalSales + price, cookingMenu: [...remainCookingMenu] };
+                state.cookingMenu = state.cookingMenu.filter((el) => el.id !== payId);
+                state.totalSales += price;
+                break;
             case 'plus-maxCooking':
-                return { ...state, maxCookingNum: state.maxCookingNum + 1 > 3 ? 3 : state.maxCookingNum + 1 };
+                state.maxCookingNum = state.maxCookingNum + 1 > 3 ? 3 : state.maxCookingNum + 1;
+                break;
             case 'minus-maxCooking':
-                return { ...state, maxCookingNum: state.maxCookingNum - 1 < 0 ? 0 : state.maxCookingNum - 1 };
+                state.maxCookingNum = state.maxCookingNum - 1 < 0 ? 0 : state.maxCookingNum - 1;
+                break;
             default:
                 return state;
         }

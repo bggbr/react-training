@@ -60,7 +60,6 @@ export default function Menu({ addMenu, removeMenu, category }) {
             window.addEventListener('keyup', handleKeyup);
             return () => window.removeEventListener('keyup', handleKeyup); // 2
         },
-        [],
     );
 
     return (
