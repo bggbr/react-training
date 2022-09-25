@@ -2,19 +2,17 @@ import { useContext, useState, useEffect, useRef } from 'react';
 import Button from './Button';
 import { MenuContext, CookingContext } from '../state';
 
-export default function Menu({ addMenu, removeMenu, category }) {
+export default function Menu() {
     const [name, setName] = useState('');
     const [cookingTime, setCookingTime] = useState('');
     const [price, setPrice] = useState('');
-    const allMenuList = useContext(MenuContext).allMenuList;
+
     const { state, dispatch } = useContext(CookingContext);
 
-    const menuList = allMenuList.filter((el) => el.category === category);
-
-    console.log('menu rendering');
+    // console.log('menu rendering');
 
     function addOneMenu() {
-        let id = Math.max(...allMenuList.map((item) => item.id)) + 1;
+        let id = Math.max(...state.menu.map((item) => item.id)) + 1;
 
         if (!(name.length && cookingTime.length && price.length)) {
             alert('모든 값을 입력해주세요');
@@ -26,9 +24,9 @@ export default function Menu({ addMenu, removeMenu, category }) {
             name,
             cookingTime: parseInt(cookingTime),
             price: parseInt(price),
-            category,
+            category: state.category,
         };
-        addMenu(menu);
+        dispatch({ type: 'add-menu', addedMenu: menu });
         setName('');
         setCookingTime('');
         setPrice('');
@@ -69,17 +67,19 @@ export default function Menu({ addMenu, removeMenu, category }) {
                 <div className="text-2xl self-center">메뉴</div>
             </h2>
             <div className="space-y-2">
-                {menuList.map((menu) => (
-                    <div key={menu.id}>
-                        <div>{menu.name}</div>
-                        <div>조리시간: {menu.cookingTime}</div>
-                        <div>가격: {menu.price}</div>
-                        <Button className="mr-2 my-2.5" onClick={(e) => addCooking(menu, e)}>
-                            조리 시작
-                        </Button>
-                        <Button onClick={(e) => removeMenu(menu)}>메뉴 삭제</Button>
-                    </div>
-                ))}
+                {state.menu
+                    .filter((el) => el.category === state.category)
+                    .map((menu) => (
+                        <div key={menu.id}>
+                            <div>{menu.name}</div>
+                            <div>조리시간: {menu.cookingTime}</div>
+                            <div>가격: {menu.price}</div>
+                            <Button className="mr-2 my-2.5" onClick={(e) => addCooking(menu, e)}>
+                                조리 시작
+                            </Button>
+                            <Button onClick={() => dispatch({ type: 'delete-menu', deletedMenu: menu })}>메뉴 삭제</Button>
+                        </div>
+                    ))}
             </div>
 
             <div className="space-x-2">
