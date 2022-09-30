@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect, useRef } from 'react';
 import Button from './Button';
-import { MenuContext, CookingContext } from '../state';
+import { CookingContext } from '../state';
+import Link from 'next/link';
 
 export default function Menu() {
     const [name, setName] = useState('');
@@ -8,8 +9,6 @@ export default function Menu() {
     const [price, setPrice] = useState('');
 
     const { state, dispatch } = useContext(CookingContext);
-
-    // console.log('menu rendering');
 
     function addOneMenu() {
         let id = Math.max(...state.menu.map((item) => item.id)) + 1;
@@ -64,7 +63,9 @@ export default function Menu() {
         <div className="bg-slate-400 p-5 w-full">
             <h2 className="font-bold flex space-x-3 mb-4">
                 <div className="text-5xl">🥘</div>
-                <div className="text-2xl self-center">메뉴</div>
+                <Link href="/menu">
+                    <a className="text-2xl self-center">전체 메뉴 보기</a>
+                </Link>
             </h2>
             <div className="space-y-2">
                 {state.menu

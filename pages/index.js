@@ -1,31 +1,19 @@
-import React, { useState, useReducer, useMemo } from 'react';
+import React, { useState } from 'react';
 import Category from '../src/component/Category';
 import Header from '../src/component/Header';
 import Menu from '../src/component/Menu';
-import { initialState, reducer, CookingContext } from '../src/state';
 
 function Home() {
-    const [state, dispatch] = useReducer(reducer, initialState);
-
-    const cook = useMemo(
-        () => ({
-            state,
-            dispatch,
-        }),
-        [state, dispatch],
-    );
-
     const [v, setV] = useState(1);
     return (
         <div>
             {/* <button onClick={() => setV(v + 1)}>증가</button> */}
-            <CookingContext.Provider value={cook}>
-                <Header />
-                <div className="flex">
-                    <Category />
-                    <Menu />
-                </div>
-            </CookingContext.Provider>
+
+            <Header />
+            <div className="flex">
+                <Category />
+                <Menu />
+            </div>
         </div>
     );
 }
