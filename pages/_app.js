@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }) {
         }),
         [state, dispatch],
     );
+
     return (
         <CookingContext.Provider value={cook}>
             <Component {...pageProps} />
