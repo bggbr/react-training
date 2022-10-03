@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import Button from './Button';
+import Button from '../common/Button';
 import { CookingContext } from '../state';
 
 export default function Category() {
