@@ -34,7 +34,6 @@ export const initialState = {
 };
 
 export const reducer = (_state, action) => {
-    console.log(action);
     return produce(_state, (state) => {
         switch (action.type) {
             case 'set-category':
