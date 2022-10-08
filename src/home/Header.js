@@ -1,6 +1,5 @@
-import { memo, useEffect, useState, useContext, useReducer } from 'react';
-import { MenuContext } from '../state';
-import Button from './Button';
+import { memo, useContext } from 'react';
+import Button from '../common/Button';
 import Cooking from './Cooking';
 import { CookingContext } from '../state';
 

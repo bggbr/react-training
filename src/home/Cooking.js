@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import { CookingContext } from '../state';
-import Button from './Button';
+import Button from '../common/Button';
 
 export default function Cooking({ cook }) {
     const [count, setCount] = useState(cook.remainingTime);
