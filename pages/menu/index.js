@@ -4,7 +4,7 @@ import { CookingContext } from '../../src/state';
 export default function Menu() {
 	const [allMenu, setAllMenu] = useState([]);
 	const { state, dispatch } = useContext(CookingContext);
-	console.log('menu rendering', state);
+	// console.log('menu rendering', state);
 
 	useEffect(() => {
 		const fetchMenu = async () => {
