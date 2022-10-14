@@ -6,14 +6,13 @@ import axios from 'axios';
 
 function Home() {
 	const [v, setV] = useState(1);
-	console.log();
 
 	useEffect(() => {
 		async function fetchData() {
-			const res = await fetch('/api/', {
+			const res = await fetch('/api', {
 				method: 'GET',
 			});
-			console.log(await res.json());
+			console.log('fetch data =', await res.json());
 		}
 		fetchData();
 	}, []);

@@ -1,11 +1,11 @@
 import fs from 'fs';
 
 export default function Home(req, res) {
-	const initData = readInitFile();
+	const initData = readInitData();
 	res.status(200).json(initData);
 }
 
-function readInitFile() {
+function readInitData() {
 	const initData = JSON.parse(fs.readFileSync('./server-data.json'));
 	return initData;
 }
