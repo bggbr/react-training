@@ -10,24 +10,7 @@ export const initialState = {
 		{ id: 2, en: 'chinese', kr: '중식' },
 	],
 	category: 'korean',
-	menu: [
-		{
-			id: 1,
-			name: '김치찌개',
-			cookingTime: 2,
-			price: 7000,
-			category: 'korean',
-			history: [],
-		},
-		{
-			id: 2,
-			name: '참치찌개',
-			cookingTime: 2,
-			price: 7000,
-			category: 'korean',
-			history: [],
-		},
-	],
+	menu: [],
 	cookingMenu: [],
 	maxCookingNum: 3,
 	totalSales: 0,
@@ -36,6 +19,9 @@ export const initialState = {
 export const reducer = (_state, action) => {
 	return produce(_state, (state) => {
 		switch (action.type) {
+			case 'init-data':
+				state.menu = action.data.menus;
+				break;
 			case 'set-category':
 				let { nowCategory } = action;
 				state.category = nowCategory;

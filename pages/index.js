@@ -5,18 +5,6 @@ import Menu from '../src/home/Menu';
 import axios from 'axios';
 
 function Home() {
-	const [v, setV] = useState(1);
-
-	useEffect(() => {
-		async function fetchData() {
-			const res = await fetch('/api', {
-				method: 'GET',
-			});
-			console.log('fetch data =', await res.json());
-		}
-		fetchData();
-	}, []);
-
 	return (
 		<div>
 			{/* <button onClick={() => setV(v + 1)}>증가</button> */}
