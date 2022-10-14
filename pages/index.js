@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Category from '../src/component/Category';
-import Header from '../src/component/Header';
-import Menu from '../src/component/Menu';
+import Category from '../src/home/Category';
+import Header from '../src/home/Header';
+import Menu from '../src/home/Menu';
 import axios from 'axios';
 
 function Home() {
