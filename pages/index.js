@@ -7,8 +7,6 @@ import axios from 'axios';
 function Home() {
 	return (
 		<div>
-			{/* <button onClick={() => setV(v + 1)}>증가</button> */}
-
 			<Header />
 			<div className='flex'>
 				<Category />

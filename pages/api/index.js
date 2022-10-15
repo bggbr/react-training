@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 export default function Home(req, res) {
 	const initData = readInitData();
@@ -6,7 +7,7 @@ export default function Home(req, res) {
 }
 
 function readInitData() {
-	const initData = JSON.parse(fs.readFileSync('./server-data.json'));
+	const initData = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'server-data.json'), 'utf8'));
 	return initData;
 }
 

@@ -1,0 +1,8 @@
+{
+	"menus": [
+		{ "id": 1, "name": "초밥", "cookingTime": 5, "price": 9000, "category": "japaness", "history": [] },
+		{ "id": 2, "name": "김치찌개", "cookingTime": 6, "price": 8000, "category": "korean", "history": [] },
+		{ "id": 3, "name": "된장찌개", "cookingTime": 3, "price": 9000, "category": "korean", "history": [] },
+		{ "id": 4, "name": "콩국수", "cookingTime": 17, "price": 1234, "category": "korean", "history": [] }
+	]
+}
