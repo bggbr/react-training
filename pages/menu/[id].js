@@ -18,12 +18,12 @@ export default function MenuDetailPage({ id }) {
 				break;
 			}
 			case 'price': {
-				const menu = await putMenuDetail({ id, time: value, type });
+				const menu = await putMenuDetail({ id, price: value, type });
 				dispatch({ type: 'change-price', price: menu.price, id });
 				break;
 			}
 			case 'category': {
-				const menu = await putMenuDetail({ id, time: value, type });
+				const menu = await putMenuDetail({ id, category: value, type });
 				dispatch({ type: 'change-category', category: menu.category, id });
 				break;
 			}
